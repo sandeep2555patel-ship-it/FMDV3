@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bespoke Master Curator Portal | FMD Shopping</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Shared Style -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Page Specific Style -->
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-logo">FMD SHOPPING</div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header id="main-header">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html?category=Accessories">Accessories</a>
+        <a href="index.html?category=Apparel">Apparel</a>
+        <a href="index.html?category=Fragrances">Fragrances</a>
+        <a href="admin.html" class="active">Admin Portal</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="action-btn" id="search-btn" title="Search Catalog">
+          <i data-lucide="search"></i>
+        </button>
+        <a href="wishlist.html" class="action-btn" title="Saved Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge wishlist-count">0</span>
+        </a>
+        <a href="cart.html" class="action-btn" title="Shopping Bag">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+        
+        <div class="profile-menu-container">
+          <button class="action-btn" id="profile-btn" title="Account Access">
+            <i data-lucide="user"></i>
+          </button>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <div class="profile-dropdown-header">
+              <p id="dropdown-user-name">Guest User</p>
+              <p id="dropdown-user-email">guest@fmdshopping.com</p>
+            </div>
+            <a href="profile.html" class="profile-dropdown-link">
+              <i data-lucide="settings"></i> My Profile
+            </a>
+            <a href="wishlist.html" class="profile-dropdown-link">
+              <i data-lucide="heart"></i> My Wishlist
+            </a>
+            <a href="admin.html" class="profile-dropdown-link active">
+              <i data-lucide="shield"></i> Admin Portal
+            </a>
+            <a href="login.html" class="profile-dropdown-link" style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px;" id="dropdown-auth-btn">
+              <i data-lucide="log-in"></i> Access Account
+            </a>
+          </div>
+        </div>
+        
+        <button class="action-btn" id="theme-toggle" title="Switch Theme">
+          <i data-lucide="sun"></i>
+        </button>
+        
+        <button class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-close" id="search-close">&times;</button>
+    <div class="search-container">
+      <form id="search-form">
+        <div class="search-input-wrapper">
+          <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+          <button type="submit" class="search-submit">
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN PORTAL MAIN BODY -->
+  <main class="admin-wrapper">
+    <div class="wishlist-header">
+      <h1 class="brand-logo" style="font-size: 2.2rem; display: inline-block;">Master Curator Portal</h1>
+      <p style="color: var(--text-secondary); margin-top: 10px; font-size: 0.9rem;">Monitor boutique commissions, stock inventories, and luxury metrics</p>
+    </div>
+
+    <!-- METRICS GRID BANNER -->
+    <section class="admin-metrics-grid">
+      <!-- Total Sales -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-title">Consolidated Gross Turnover</div>
+          <div class="metric-val" id="metric-turnover">$0</div>
+        </div>
+        <div class="metric-icon-box">
+          <i data-lucide="dollar-sign"></i>
+        </div>
+      </div>
+
+      <!-- Commission counts -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-title">Sealed Commissions</div>
+          <div class="metric-val" id="metric-orders-count">0</div>
+        </div>
+        <div class="metric-icon-box">
+          <i data-lucide="shopping-bag"></i>
+        </div>
+      </div>
+
+      <!-- Total catalog items -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-title">Unique Designs</div>
+          <div class="metric-val" id="metric-products-count">0</div>
+        </div>
+        <div class="metric-icon-box">
+          <i data-lucide="package"></i>
+        </div>
+      </div>
+
+      <!-- Client accounts registered -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-title">Elite Patrons</div>
+          <div class="metric-val" id="metric-patrons-count">1</div>
+        </div>
+        <div class="metric-icon-box">
+          <i data-lucide="users"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- MIDDLE SECTION split layout -->
+    <div class="admin-split">
+      <!-- Product inventory listing -->
+      <section class="admin-section-box">
+        <h2 class="admin-section-title">Design Inventory Registry</h2>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Design Preview</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Standard Price</th>
+                <th>Stock</th>
+                <th style="text-align: right;">Clear</th>
+              </tr>
+            </thead>
+            <tbody id="admin-inventory-list">
+              <!-- Loaded dynamically by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Add design form -->
+      <section class="admin-section-box">
+        <h2 class="admin-section-title">Commission New Design</h2>
+        <form id="admin-add-product-form">
+          <div class="form-group">
+            <label class="form-label" for="adm-title">Design Title</label>
+            <input type="text" id="adm-title" class="form-control" placeholder="e.g. Sterling Chronograph" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="adm-category">Collection Category</label>
+            <select id="adm-category" class="form-control" required style="background-color: var(--bg-primary); border: 1px solid rgba(255, 255, 255, 0.08); color: white;">
+              <option value="Accessories">Accessories</option>
+              <option value="Apparel">Apparel</option>
+              <option value="Fragrances">Fragrances</option>
+              <option value="Footwear">Footwear</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="adm-price">Price (USD)</label>
+              <input type="number" id="adm-price" class="form-control" placeholder="2400" required min="1">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="adm-stock">Stock Count</label>
+              <input type="number" id="adm-stock" class="form-control" placeholder="10" required min="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="adm-image">Image URL</label>
+            <input type="url" id="adm-image" class="form-control" placeholder="https://images.unsplash.com/photo-..." required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="adm-desc">Curator description</label>
+            <textarea id="adm-desc" class="form-control" placeholder="Bespoke descriptive detailing copy..." required style="height: 100px; resize: none; background-color: var(--bg-primary); border: 1px solid rgba(255, 255, 255, 0.08); color: white; border-radius: var(--border-radius-sm); padding: 12px; font-size: 0.8rem;"></textarea>
+          </div>
+
+          <button type="submit" class="btn-gold" style="width: 100%; margin-top: 15px;">
+            <i data-lucide="plus"></i> Commission Design
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <!-- LOWER SECTION FULL WIDTH: COMMISSIONS AUDITING -->
+    <section class="admin-section-box">
+      <h2 class="admin-section-title">Client Commissions Audit Log</h2>
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Invoice ID</th>
+              <th>Client Email</th>
+              <th>Date Registered</th>
+              <th>Courier Speed</th>
+              <th>Total Value</th>
+              <th>Order Progress</th>
+              <th style="text-align: right;">Toggle Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-orders-list">
+            <!-- Loaded dynamically by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+        <p class="footer-desc">
+          A premium luxury boutique curated to deliver world-class elegance, unparalleled craftsmanship, and golden-standard retail design.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+          <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-link"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Collections</h4>
+        <ul class="footer-links">
+          <li><a href="index.html?category=Accessories">Luxury Watches</a></li>
+          <li><a href="index.html?category=Apparel">Bespoke Couture</a></li>
+          <li><a href="index.html?category=Fragrances">Exquisite Parfums</a></li>
+          <li><a href="index.html?category=Footwear">Designer Footwear</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="profile.html">My Account</a></li>
+          <li><a href="cart.html">Shopping Bag</a></li>
+          <li><a href="wishlist.html">Saved Wishlist</a></li>
+          <li><a href="admin.html">Concierge Portal</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-newsletter">
+        <h4 class="footer-heading">Newsletter</h4>
+        <p class="newsletter-desc">Subscribe to unlock private sales, new collections, and golden event invitations.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Thank you for subscribing to our luxury newsletter!', 'success');">
+          <input type="email" class="newsletter-input" placeholder="Your premium email" required>
+          <button type="submit" class="newsletter-btn">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 FMD Shopping. Designed to the Gold Standard. All Rights Reserved.</p>
+      <div class="footer-payments">
+        <i data-lucide="credit-card" title="Visa / MasterCard / Amex"></i>
+        <i data-lucide="shield-check" title="100% Secure Checkout"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" id="back-to-top" title="Top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <!-- Lucide CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Master Script -->
+  <script src="script.js"></script>
+  
+  <!-- Page Specific Script -->
+  <script src="admin.js"></script>
+</body>
+</html>

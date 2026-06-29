@@ -1,0 +1,175 @@
+/* 
+ * FMD Shopping - Admin Specific Styles
+ * Theme: Executive Control Room
+ */
+
+.admin-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: calc(var(--nav-height) + 40px) 40px 80px 40px;
+}
+
+/* Metric Cards Grid */
+.admin-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+.metric-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-md);
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-dark);
+  transition: var(--transition-smooth);
+}
+.metric-card:hover {
+  border-color: rgba(212, 175, 55, 0.2);
+  box-shadow: var(--shadow-gold);
+}
+.metric-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+.metric-val {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.metric-icon-box {
+  background-color: rgba(212, 175, 55, 0.08);
+  color: var(--gold-primary);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Split layout for lists and creators */
+.admin-split {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.admin-section-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  padding: 35px;
+  box-shadow: var(--shadow-dark);
+}
+
+.admin-section-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 15px;
+  color: var(--text-primary);
+}
+
+/* Tables Styling */
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+.admin-table th {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+.admin-table td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+.admin-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+/* Thumbnail preview inside lists */
+.admin-prod-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Actions in tables */
+.admin-action-btn-danger {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.admin-action-btn-danger:hover {
+  transform: scale(1.15);
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+.admin-status-update-btn {
+  background: none;
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.admin-status-update-btn:hover {
+  color: var(--gold-primary);
+  border-color: var(--gold-primary);
+}
+
+/* Specific layout adjustments */
+@media (max-width: 1100px) {
+  .admin-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .admin-split {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .admin-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .admin-section-box {
+    padding: 25px 15px;
+  }
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Luxury Dashboard | FMD Shopping</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Shared Style -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Page Specific Style -->
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-logo">FMD SHOPPING</div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header id="main-header">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html?category=Accessories">Accessories</a>
+        <a href="index.html?category=Apparel">Apparel</a>
+        <a href="index.html?category=Fragrances">Fragrances</a>
+        <a href="admin.html">Admin Portal</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="action-btn" id="search-btn" title="Search Catalog">
+          <i data-lucide="search"></i>
+        </button>
+        <a href="wishlist.html" class="action-btn" title="Saved Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge wishlist-count">0</span>
+        </a>
+        <a href="cart.html" class="action-btn" title="Shopping Bag">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+        
+        <div class="profile-menu-container">
+          <button class="action-btn" id="profile-btn" title="Account Access">
+            <i data-lucide="user"></i>
+          </button>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <div class="profile-dropdown-header">
+              <p id="dropdown-user-name">Guest User</p>
+              <p id="dropdown-user-email">guest@fmdshopping.com</p>
+            </div>
+            <a href="profile.html" class="profile-dropdown-link active">
+              <i data-lucide="settings"></i> My Profile
+            </a>
+            <a href="wishlist.html" class="profile-dropdown-link">
+              <i data-lucide="heart"></i> My Wishlist
+            </a>
+            <a href="admin.html" class="profile-dropdown-link">
+              <i data-lucide="shield"></i> Admin Portal
+            </a>
+            <a href="login.html" class="profile-dropdown-link" style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px;" id="dropdown-auth-btn">
+              <i data-lucide="log-in"></i> Access Account
+            </a>
+          </div>
+        </div>
+        
+        <button class="action-btn" id="theme-toggle" title="Switch Theme">
+          <i data-lucide="sun"></i>
+        </button>
+        
+        <button class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-close" id="search-close">&times;</button>
+    <div class="search-container">
+      <form id="search-form">
+        <div class="search-input-wrapper">
+          <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+          <button type="submit" class="search-submit">
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PROFILE CONTENT CONTAINER -->
+  <main class="profile-wrapper">
+    
+    <!-- FALLBACK ACCESS LOCKED SCREEN (Shown if guest) -->
+    <div class="access-denied-container" id="access-locked-screen" style="display: none;">
+      <div class="access-denied-icon">
+        <i data-lucide="lock" style="width: 40px; height: 40px;"></i>
+      </div>
+      <h2 style="font-family: var(--font-display); margin-bottom: 15px;">Credentials Required</h2>
+      <p style="color: var(--text-secondary); max-width: 450px; margin-bottom: 30px; font-size: 0.9rem;">
+        You must authenticate your credentials to enter the private FMD Concierge Lounge and view past orders, shipping logs, and tier certificates.
+      </p>
+      <a href="login.html" class="btn-gold">Access Account / Sign In</a>
+    </div>
+
+    <!-- MAIN DASHBOARD SCREEN (Shown if authorized) -->
+    <div id="authorized-profile-screen" style="display: none;">
+      <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+        <h1 class="section-title" style="font-size: 2.2rem;">Concierge Lounge</h1>
+        <p class="section-subtitle">Manage your shipping credentials and luxury commissions</p>
+      </div>
+
+      <div class="profile-grid">
+        <!-- Left Column: Summary -->
+        <aside class="profile-card">
+          <div class="profile-avatar-wrapper">
+            <img src="" alt="Client Portrait" class="profile-avatar" id="profile-avatar">
+            <button class="edit-avatar-trigger" id="edit-avatar-btn" title="Change Avatar">
+              <i data-lucide="camera" style="width: 16px; height: 16px;"></i>
+            </button>
+          </div>
+          <h2 class="profile-name" id="profile-user-name">Client Name</h2>
+          <span class="profile-tier-badge" id="profile-user-tier">Gold Member</span>
+          
+          <div class="profile-meta">
+            <div class="profile-meta-item">
+              <span>Member Since</span>
+              <span id="profile-member-since">2026</span>
+            </div>
+            <div class="profile-meta-item">
+              <span>Primary Phone</span>
+              <span id="profile-user-phone">+1 (555) 777-8888</span>
+            </div>
+          </div>
+
+          <button class="btn-outline" id="profile-logout-btn" style="width: 100%; padding: 12px 20px; font-size: 0.75rem;">
+            <i data-lucide="log-out"></i> End Session
+          </button>
+        </aside>
+
+        <!-- Right Column: Details & Orders Tabs -->
+        <section class="profile-main">
+          <div class="profile-tabs-header">
+            <button class="profile-tab-btn active" data-tab="tab-details">Bespoke Credentials</button>
+            <button class="profile-tab-btn" data-tab="tab-orders">Order Invoices</button>
+          </div>
+
+          <!-- TAB 1: BESPOKE CREDENTIALS -->
+          <div class="profile-tab-content active" id="tab-details">
+            <form id="profile-details-form">
+              <h3 style="font-family: var(--font-display); font-size: 1rem; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; text-transform: uppercase;">Personal Profile</h3>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="prof-name">Full Name</label>
+                  <input type="text" id="prof-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="prof-phone">Contact Phone</label>
+                  <input type="tel" id="prof-phone" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="prof-email">Email Address (Read-Only)</label>
+                <input type="email" id="prof-email" class="form-control" readonly style="opacity: 0.6; cursor: not-allowed;">
+              </div>
+
+              <h3 style="font-family: var(--font-display); font-size: 1rem; margin-top: 40px; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; text-transform: uppercase;">Concierge Shipping Address</h3>
+              
+              <div class="form-group">
+                <label class="form-label" for="prof-street">Street Address</label>
+                <input type="text" id="prof-street" class="form-control" placeholder="100 Gilded Lane, Suite 24k">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="prof-city">City</label>
+                  <input type="text" id="prof-city" class="form-control" placeholder="New York">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="prof-zip">Postal Zip Code</label>
+                  <input type="text" id="prof-zip" class="form-control" placeholder="10021">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="prof-country">Country</label>
+                <input type="text" id="prof-country" class="form-control" placeholder="United States">
+              </div>
+
+              <button type="submit" class="btn-gold" style="margin-top: 25px;">
+                <i data-lucide="save"></i> Save Credentials
+              </button>
+            </form>
+          </div>
+
+          <!-- TAB 2: ORDER INVOICES -->
+          <div class="profile-tab-content" id="tab-orders">
+            <h3 style="font-family: var(--font-display); font-size: 1rem; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; text-transform: uppercase;">Historic Luxury Invoices</h3>
+            <div class="order-history-list" id="profile-order-list">
+              <!-- Rendered dynamically by profile.js -->
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+        <p class="footer-desc">
+          A premium luxury boutique curated to deliver world-class elegance, unparalleled craftsmanship, and golden-standard retail design.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+          <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-link"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Collections</h4>
+        <ul class="footer-links">
+          <li><a href="index.html?category=Accessories">Luxury Watches</a></li>
+          <li><a href="index.html?category=Apparel">Bespoke Couture</a></li>
+          <li><a href="index.html?category=Fragrances">Exquisite Parfums</a></li>
+          <li><a href="index.html?category=Footwear">Designer Footwear</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="profile.html">My Account</a></li>
+          <li><a href="cart.html">Shopping Bag</a></li>
+          <li><a href="wishlist.html">Saved Wishlist</a></li>
+          <li><a href="admin.html">Concierge Portal</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-newsletter">
+        <h4 class="footer-heading">Newsletter</h4>
+        <p class="newsletter-desc">Subscribe to unlock private sales, new collections, and golden event invitations.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Thank you for subscribing to our luxury newsletter!', 'success');">
+          <input type="email" class="newsletter-input" placeholder="Your premium email" required>
+          <button type="submit" class="newsletter-btn">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 FMD Shopping. Designed to the Gold Standard. All Rights Reserved.</p>
+      <div class="footer-payments">
+        <i data-lucide="credit-card" title="Visa / MasterCard / Amex"></i>
+        <i data-lucide="shield-check" title="100% Secure Checkout"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" id="back-to-top" title="Top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <!-- Lucide CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Master Script -->
+  <script src="script.js"></script>
+  
+  <!-- Page Specific Script -->
+  <script src="profile.js"></script>
+</body>
+</html>

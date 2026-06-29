@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FMD Shopping | Premium Black & Gold Luxury Boutique</title>
+  
+  <!-- Preload fonts to avoid layout shift -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Page Specific Style Additions -->
+  <style>
+    /* Hero Banner Split Layout */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: calc(var(--nav-height) + 40px) 40px 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 60px;
+    }
+    .hero-content {
+      flex: 1.2;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-subtitle {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--gold-primary);
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: inline-block;
+      border-bottom: 1.5px solid var(--gold-primary);
+      padding-bottom: 5px;
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      max-width: 550px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 20px;
+    }
+    .hero-image-wrapper {
+      flex: 0.8;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeInScale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-image-container {
+      width: 100%;
+      height: 500px;
+      border-radius: var(--border-radius-lg);
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+      box-shadow: var(--shadow-dark);
+      position: relative;
+    }
+    .hero-image-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(10,10,10,0.8), transparent);
+      z-index: 2;
+    }
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .hero-image-container:hover .hero-img {
+      transform: scale(1.05);
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--glass-bg);
+      border: 1px solid var(--gold-primary);
+      padding: 20px 30px;
+      border-radius: var(--border-radius-md);
+      backdrop-filter: blur(var(--glass-blur));
+      text-align: center;
+      z-index: 3;
+      box-shadow: var(--shadow-gold);
+    }
+    .hero-badge p:first-child {
+      font-family: var(--font-display);
+      color: var(--gold-primary);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .hero-badge p:last-child {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+    }
+
+    /* Category Showcase Cards */
+    .categories-section {
+      padding: 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background-color: var(--gold-primary);
+    }
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      letter-spacing: 1.5px;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    .category-card {
+      position: relative;
+      height: 320px;
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      cursor: pointer;
+      box-shadow: var(--shadow-dark);
+    }
+    .category-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .category-card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(10,10,10,0.9) 20%, rgba(10,10,10,0.2) 60%, transparent);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      z-index: 2;
+    }
+    .category-card:hover .category-card-img {
+      transform: scale(1.08);
+    }
+    .category-card:hover {
+      border-color: var(--gold-primary);
+      box-shadow: var(--shadow-gold);
+    }
+    .category-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .category-count {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold-primary);
+    }
+
+    /* Product Grid Section */
+    .products-section {
+      padding: 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+    .filter-tab {
+      background: var(--bg-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      padding: 10px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+    }
+    .filter-tab:hover, .filter-tab.active {
+      background: var(--gold-primary);
+      color: #000000;
+      border-color: var(--gold-primary);
+      box-shadow: var(--shadow-gold);
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    .product-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      position: relative;
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-dark);
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold-primary);
+      box-shadow: var(--shadow-gold-hover);
+    }
+    .product-img-wrapper {
+      position: relative;
+      height: 300px;
+      width: 100%;
+      overflow: hidden;
+      background-color: #1a1a1a;
+    }
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .product-card:hover .product-img {
+      transform: scale(1.05);
+    }
+    .product-actions-overlay {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 3;
+    }
+    .p-action-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: var(--transition-smooth);
+    }
+    .p-action-btn:hover {
+      background: var(--gold-primary);
+      color: #000000;
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 15px rgba(212,175,55,0.4);
+    }
+    .p-action-btn.wishlisted {
+      color: var(--gold-primary);
+    }
+    .p-action-btn.wishlisted:hover {
+      color: #ffffff;
+    }
+    .product-info-wrapper {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .product-cat {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold-primary);
+      margin-bottom: 8px;
+    }
+    .product-name-link {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 2.8em;
+    }
+    .product-name-link:hover {
+      color: var(--gold-primary);
+    }
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 15px;
+    }
+    .product-price {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .quick-add-bag {
+      background: transparent;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: var(--border-radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+    .quick-add-bag:hover {
+      background: var(--gold-primary);
+      color: #000000;
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 10px rgba(212,175,55,0.2);
+    }
+
+    /* Concierge Service Banner */
+    .promo-banner {
+      background: linear-gradient(135deg, #121212 0%, #050505 100%);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 100px 40px;
+      margin: 100px 0;
+    }
+    .promo-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+    .promo-content {
+      flex: 1.2;
+    }
+    .promo-title {
+      font-size: 2.4rem;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .promo-title span {
+      color: var(--gold-primary);
+    }
+    .promo-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      flex: 1.8;
+    }
+    .feature-box {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-md);
+      padding: 30px;
+      backdrop-filter: blur(var(--glass-blur));
+      transition: var(--transition-smooth);
+    }
+    .feature-box:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-gold);
+    }
+    .feature-icon {
+      color: var(--gold-primary);
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .feature-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .hero {
+        flex-direction: column;
+        padding-top: calc(var(--nav-height) + 20px);
+        text-align: center;
+        gap: 40px;
+      }
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-btns {
+        justify-content: center;
+      }
+      .hero-image-wrapper {
+        width: 100%;
+        max-width: 500px;
+      }
+      .hero-badge {
+        right: 0px;
+        bottom: -10px;
+      }
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .promo-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 480px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-logo">FMD SHOPPING</div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header id="main-header">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html" class="brand-logo" id="logo-ref">FMD<span>.</span></a>
+      </div>
+      
+      <nav class="nav-links" id="main-nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="index.html?category=Accessories" id="link-acc">Accessories</a>
+        <a href="index.html?category=Apparel" id="link-app">Apparel</a>
+        <a href="index.html?category=Fragrances" id="link-fra">Fragrances</a>
+        <a href="admin.html" id="link-adm">Admin Portal</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <!-- Search Button -->
+        <button class="action-btn" id="search-btn" title="Search Catalog">
+          <i data-lucide="search"></i>
+        </button>
+        
+        <!-- Wishlist Button -->
+        <a href="wishlist.html" class="action-btn" id="wishlist-link" title="Saved Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge wishlist-count">0</span>
+        </a>
+        
+        <!-- Cart Button -->
+        <a href="cart.html" class="action-btn" id="cart-link" title="Shopping Bag">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+        
+        <!-- Profile Button / Dropdown -->
+        <div class="profile-menu-container">
+          <button class="action-btn" id="profile-btn" title="Account Access">
+            <i data-lucide="user"></i>
+          </button>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <div class="profile-dropdown-header">
+              <p id="dropdown-user-name">Guest User</p>
+              <p id="dropdown-user-email">guest@fmdshopping.com</p>
+            </div>
+            <a href="profile.html" class="profile-dropdown-link" id="link-prof">
+              <i data-lucide="settings"></i> My Profile
+            </a>
+            <a href="wishlist.html" class="profile-dropdown-link" id="link-wish">
+              <i data-lucide="heart"></i> My Wishlist
+            </a>
+            <a href="admin.html" class="profile-dropdown-link" id="link-admin-panel">
+              <i data-lucide="shield"></i> Admin Portal
+            </a>
+            <a href="login.html" class="profile-dropdown-link" style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px;" id="dropdown-auth-btn">
+              <i data-lucide="log-in"></i> Access Account
+            </a>
+          </div>
+        </div>
+        
+        <!-- Dark Mode Toggle -->
+        <button class="action-btn" id="theme-toggle" title="Switch Theme">
+          <i data-lucide="sun"></i>
+        </button>
+        
+        <!-- Hamburger Menu (Mobile) -->
+        <button class="hamburger" id="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-close" id="search-close">&times;</button>
+    <div class="search-container">
+      <form id="search-form">
+        <div class="search-input-wrapper">
+          <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+          <button type="submit" class="search-submit">
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- HERO BANNER -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-subtitle">The Golden Standard of Retail</span>
+        <h1 class="hero-title">Experience <span>True Luxury</span> Shopping</h1>
+        <p class="hero-desc">Curated haute couture, timepieces, and fragrances designed to project prestige and power. Discover unparalleled quality with bespoke service and worldwide next-day express delivery.</p>
+        <div class="hero-btns">
+          <a href="#catalog-start" class="btn-gold">Explore Catalog</a>
+          <a href="index.html?category=Accessories" class="btn-outline">Shop Accessories</a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <div class="hero-image-container">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" class="hero-img" alt="Luxury Showroom Display">
+        </div>
+        <div class="hero-badge">
+          <p>24k</p>
+          <p>Standard Quality</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES SECTION -->
+    <section class="categories-section">
+      <div class="section-header">
+        <h2 class="section-title">The Curated Curries</h2>
+        <p class="section-subtitle">Delineated genres of luxury styling items</p>
+      </div>
+      <div class="category-grid">
+        <div class="category-card" onclick="window.location.href='index.html?category=Accessories'">
+          <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400&auto=format&fit=crop" class="category-card-img" alt="Luxury Watches">
+          <div class="category-card-overlay">
+            <h3 class="category-name">Accessories</h3>
+            <span class="category-count">Chronographs & Pens</span>
+          </div>
+        </div>
+        <div class="category-card" onclick="window.location.href='index.html?category=Apparel'">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=400&auto=format&fit=crop" class="category-card-img" alt="Luxury Apparel">
+          <div class="category-card-overlay">
+            <h3 class="category-name">Apparel</h3>
+            <span class="category-count">Bespoke Couture</span>
+          </div>
+        </div>
+        <div class="category-card" onclick="window.location.href='index.html?category=Fragrances'">
+          <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=400&auto=format&fit=crop" class="category-card-img" alt="Fine Fragrances">
+          <div class="category-card-overlay">
+            <h3 class="category-name">Fragrances</h3>
+            <span class="category-count">Exquisite Oud & Amber</span>
+          </div>
+        </div>
+        <div class="category-card" onclick="window.location.href='index.html?category=Footwear'">
+          <img src="https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?q=80&w=400&auto=format&fit=crop" class="category-card-img" alt="Luxury Footwear">
+          <div class="category-card-overlay">
+            <h3 class="category-name">Footwear</h3>
+            <span class="category-count">Designer Heels & Stilettos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN PRODUCT CATALOG SECTION -->
+    <section class="products-section" id="catalog-start">
+      <div class="section-header">
+        <h2 class="section-title">Prestige Catalog</h2>
+        <p class="section-subtitle" id="catalog-summary-text">Discover handpicked items to complete your aesthetic</p>
+      </div>
+      
+      <!-- Filter Tabs -->
+      <div class="filter-tabs" id="category-filters">
+        <button class="filter-tab active" data-category="all">All Items</button>
+        <button class="filter-tab" data-category="Accessories">Accessories</button>
+        <button class="filter-tab" data-category="Apparel">Apparel</button>
+        <button class="filter-tab" data-category="Fragrances">Fragrances</button>
+        <button class="filter-tab" data-category="Footwear">Footwear</button>
+      </div>
+
+      <!-- Main Products Grid -->
+      <div class="product-grid" id="main-product-grid">
+        <!-- Rendered dynamically by script.js & index code -->
+      </div>
+    </section>
+
+    <!-- GOLD CONCIERGE PROMO -->
+    <section class="promo-banner">
+      <div class="promo-container">
+        <div class="promo-content">
+          <h2 class="promo-title">Privé <span>Concierge</span> Service</h2>
+          <p class="promo-desc">Our dedicated lifestyle consultants are available 24 hours a day to assist in sizing, personalized styling portfolios, custom engravings, and secured delivery planning for VIP patrons.</p>
+          <a href="profile.html" class="btn-gold">Consult Concierge</a>
+        </div>
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="feature-icon"><i data-lucide="plane-takeoff"></i></div>
+            <h3 class="feature-title">Express Delivery</h3>
+            <p class="feature-desc">Guaranteed next-day delivery in customized, secure-seal luxury cases globally.</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon"><i data-lucide="award"></i></div>
+            <h3 class="feature-title">Certified Value</h3>
+            <p class="feature-desc">Every purchase receives a numbered gold certificate of authenticity and value statement.</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon"><i data-lucide="refresh-cw"></i></div>
+            <h3 class="feature-title">Bespoke Returns</h3>
+            <p class="feature-desc">No-hassle hand-picked courier returns right from your doorstep or suite.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer-ref">
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+        <p class="footer-desc">
+          A premium luxury boutique curated to deliver world-class elegance, unparalleled craftsmanship, and golden-standard retail design.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+          <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-link"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Collections</h4>
+        <ul class="footer-links">
+          <li><a href="index.html?category=Accessories">Luxury Watches</a></li>
+          <li><a href="index.html?category=Apparel">Bespoke Couture</a></li>
+          <li><a href="index.html?category=Fragrances">Exquisite Parfums</a></li>
+          <li><a href="index.html?category=Footwear">Designer Footwear</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="profile.html">My Account</a></li>
+          <li><a href="cart.html">Shopping Bag</a></li>
+          <li><a href="wishlist.html">Saved Wishlist</a></li>
+          <li><a href="admin.html">Concierge Portal</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-newsletter">
+        <h4 class="footer-heading">Newsletter</h4>
+        <p class="newsletter-desc">Subscribe to unlock private sales, new collections, and golden event invitations.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Thank you for subscribing to our luxury newsletter!', 'success');">
+          <input type="email" class="newsletter-input" placeholder="Your premium email" required>
+          <button type="submit" class="newsletter-btn">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 FMD Shopping. Designed to the Gold Standard. All Rights Reserved.</p>
+      <div class="footer-payments">
+        <i data-lucide="credit-card" title="Visa / MasterCard / Amex"></i>
+        <i data-lucide="shield-check" title="100% Secure Checkout"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" id="back-to-top" title="Top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <!-- Lucide CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Master Script -->
+  <script src="script.js"></script>
+  
+  <!-- Page Specific Execution -->
+  <script>
+    // PAGE CONNECTION NOTES:
+    // This page connects to:
+    // - product.html?id=[productId] on clicking a product name or card image.
+    // - cart.html on clicking "Bag" icon or adding/viewing cart.
+    // - wishlist.html on clicking "Heart" icon or viewing saved wishlist items.
+    // - profile.html on accessing profile details.
+    // - login.html on choosing "Access Account" from profile dropdown.
+    // - admin.html on clicking "Admin Portal".
+    
+    window.onPageLoad = function() {
+      renderCatalog();
+      setupCategoryFilter();
+      checkAuthStatus();
+    };
+
+    function checkAuthStatus() {
+      const loggedInUser = JSON.parse(localStorage.getItem("fmd_active_user"));
+      const nameElem = document.getElementById("dropdown-user-name");
+      const emailElem = document.getElementById("dropdown-user-email");
+      const authBtn = document.getElementById("dropdown-auth-btn");
+
+      if (loggedInUser) {
+        nameElem.textContent = loggedInUser.name;
+        emailElem.textContent = loggedInUser.email;
+        authBtn.innerHTML = '<i data-lucide="log-out"></i> Sign Out';
+        authBtn.href = "#";
+        authBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          localStorage.removeItem("fmd_active_user");
+          showToast("Successfully signed out of luxury session", "info");
+          setTimeout(() => window.location.reload(), 1000);
+        });
+      }
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function renderCatalog() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const categoryParam = urlParams.get("category");
+      const searchParam = urlParams.get("search");
+      
+      const products = FMD_DB.getProducts();
+      const grid = document.getElementById("main-product-grid");
+      const summaryText = document.getElementById("catalog-summary-text");
+      
+      let filtered = [...products];
+
+      // Reset active state of tabs
+      const tabs = document.querySelectorAll(".filter-tab");
+      tabs.forEach(tab => tab.classList.remove("active"));
+
+      if (categoryParam) {
+        filtered = filtered.filter(p => p.category.toLowerCase() === categoryParam.toLowerCase());
+        const activeTab = Array.from(tabs).find(t => t.getAttribute("data-category").toLowerCase() === categoryParam.toLowerCase());
+        if (activeTab) activeTab.classList.add("active");
+        summaryText.textContent = `Displaying exclusive items inside '${categoryParam}'`;
+      } else if (searchParam) {
+        const query = searchParam.toLowerCase();
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+        summaryText.textContent = `Showing results for refined search query: "${searchParam}" (${filtered.length} found)`;
+        
+        // Highlight first tab since search doesn't map directly to single tab
+        tabs[0].classList.add("active");
+      } else {
+        tabs[0].classList.add("active");
+        summaryText.textContent = "Discover handpicked items to complete your aesthetic";
+      }
+
+      grid.innerHTML = "";
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; border: 1px dashed var(--glass-border); border-radius: var(--border-radius-md); background: var(--bg-secondary);">
+            <i data-lucide="frown" style="width: 48px; height: 48px; color: var(--gold-primary); margin-bottom: 15px;"></i>
+            <h3 style="font-family: var(--font-display); color: var(--text-primary); margin-bottom: 10px;">Collection Unavailable</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">We could not match any luxury items to your query. Try another search or category.</p>
+            <a href="index.html" class="btn-gold" style="margin-top: 25px; padding: 10px 20px; font-size: 0.75rem;">View Full Catalog</a>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+
+      const wishlist = FMD_DB.getWishlist();
+
+      filtered.forEach(p => {
+        const isWishlisted = wishlist.includes(p.id);
+        const card = document.createElement("div");
+        card.className = "product-card";
+        
+        card.innerHTML = `
+          <div class="product-img-wrapper" onclick="window.location.href='product.html?id=${p.id}'">
+            <img src="${p.image}" class="product-img" alt="${p.name}">
+          </div>
+          <div class="product-actions-overlay">
+            <button class="p-action-btn ${isWishlisted ? 'wishlisted' : ''}" data-id="${p.id}" title="Add to Wishlist" onclick="event.stopPropagation(); toggleWishlist(this, ${p.id});">
+              <i data-lucide="heart"></i>
+            </button>
+            <button class="p-action-btn" title="View Luxury Details" onclick="event.stopPropagation(); window.location.href='product.html?id=${p.id}'">
+              <i data-lucide="eye"></i>
+            </button>
+          </div>
+          <div class="product-info-wrapper">
+            <span class="product-cat">${p.category}</span>
+            <a href="product.html?id=${p.id}" class="product-name-link">${p.name}</a>
+            <div class="product-footer">
+              <span class="product-price">$${p.price.toLocaleString()}</span>
+              <button class="quick-add-bag" onclick="event.stopPropagation(); FMD_DB.addToCart(${p.id}, 1);">
+                <i data-lucide="shopping-bag"></i> Quick Add
+              </button>
+            </div>
+          </div>
+        `;
+        
+        grid.appendChild(card);
+      });
+
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function toggleWishlist(button, id) {
+      const added = FMD_DB.addToWishlist(id);
+      if (added) {
+        button.classList.add("wishlisted");
+      } else {
+        button.classList.remove("wishlisted");
+      }
+    }
+
+    function setupCategoryFilter() {
+      const filters = document.getElementById("category-filters");
+      if (!filters) return;
+      
+      filters.addEventListener("click", (e) => {
+        const tab = e.target.closest(".filter-tab");
+        if (!tab) return;
+        
+        const category = tab.getAttribute("data-category");
+        if (category === "all") {
+          window.location.href = "index.html#catalog-start";
+        } else {
+          window.location.href = `index.html?category=${encodeURIComponent(category)}#catalog-start`;
+        }
+      });
+    }
+  </script>
+</body>
+</html>

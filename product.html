@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bespoke Showcase | FMD Shopping</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Shared Style -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Page Specific Style -->
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-logo">FMD SHOPPING</div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header id="main-header">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html?category=Accessories">Accessories</a>
+        <a href="index.html?category=Apparel">Apparel</a>
+        <a href="index.html?category=Fragrances">Fragrances</a>
+        <a href="admin.html">Admin Portal</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="action-btn" id="search-btn" title="Search Catalog">
+          <i data-lucide="search"></i>
+        </button>
+        <a href="wishlist.html" class="action-btn" title="Saved Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge wishlist-count">0</span>
+        </a>
+        <a href="cart.html" class="action-btn" title="Shopping Bag">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+        
+        <div class="profile-menu-container">
+          <button class="action-btn" id="profile-btn" title="Account Access">
+            <i data-lucide="user"></i>
+          </button>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <div class="profile-dropdown-header">
+              <p id="dropdown-user-name">Guest User</p>
+              <p id="dropdown-user-email">guest@fmdshopping.com</p>
+            </div>
+            <a href="profile.html" class="profile-dropdown-link">
+              <i data-lucide="settings"></i> My Profile
+            </a>
+            <a href="wishlist.html" class="profile-dropdown-link">
+              <i data-lucide="heart"></i> My Wishlist
+            </a>
+            <a href="admin.html" class="profile-dropdown-link">
+              <i data-lucide="shield"></i> Admin Portal
+            </a>
+            <a href="login.html" class="profile-dropdown-link" style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px;" id="dropdown-auth-btn">
+              <i data-lucide="log-in"></i> Access Account
+            </a>
+          </div>
+        </div>
+        
+        <button class="action-btn" id="theme-toggle" title="Switch Theme">
+          <i data-lucide="sun"></i>
+        </button>
+        
+        <button class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-close" id="search-close">&times;</button>
+    <div class="search-container">
+      <form id="search-form">
+        <div class="search-input-wrapper">
+          <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+          <button type="submit" class="search-submit">
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PRODUCT MAIN VIEW SECTION -->
+  <main class="product-details-wrapper">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs" id="details-breadcrumbs">
+      <a href="index.html">Bespoke Collection</a>
+      <span>/</span>
+      <a href="#" id="breadcrumb-category">Accessories</a>
+      <span>/</span>
+      <span style="color: var(--gold-primary);" id="breadcrumb-item-name">Onyx Chronograph</span>
+    </div>
+
+    <!-- Product Layout Grid -->
+    <div class="details-grid" id="product-details-container">
+      <!-- LEFT COLUMN: PHOTO GALLERY -->
+      <div class="gallery-container">
+        <div class="main-preview-box">
+          <img src="" alt="Premium Detail Showcase" class="main-preview-img" id="main-product-image">
+        </div>
+        <!-- Thumbnail strip -->
+        <div class="thumbnail-strip" id="product-thumbnail-strip">
+          <!-- Populated dynamically by product.js -->
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: SELLING CRITERIA -->
+      <div class="sales-container">
+        <span class="p-category" id="details-category">Accessories</span>
+        <h1 class="p-title" id="details-name">Onyx Chronograph</h1>
+        
+        <!-- Ratings Row -->
+        <div class="p-rating-row">
+          <div class="rating-stars" id="details-stars">
+            <!-- Populated dynamically by product.js -->
+          </div>
+          <span id="details-reviews-count">(142 Client Reviews)</span>
+        </div>
+
+        <!-- Pricing Tag -->
+        <div class="p-price-tag" id="details-price">$1,250</div>
+
+        <!-- Description -->
+        <p class="p-description" id="details-desc">
+          An iconic masterpiece designed with ebonized materials, a custom midnight-sunray dial, and golden details. Water resistant up to 100 meters, this item is the gold standard of prestige.
+        </p>
+
+        <!-- Sizing Options -->
+        <div class="option-selection-header">Select Luxury Specification</div>
+        <div class="size-options-grid" id="details-size-selectors">
+          <!-- Rendered dynamically by product.js -->
+        </div>
+
+        <!-- Purchase & Wishlist Controls -->
+        <div class="purchase-controls">
+          <!-- Quantity Plus/Minus -->
+          <div class="qty-counter-box">
+            <button class="qty-btn" id="qty-dec" title="Decrease Quantity">
+              <i data-lucide="minus"></i>
+            </button>
+            <input type="number" id="qty-count-input" class="qty-input" value="1" min="1" readonly>
+            <button class="qty-btn" id="qty-inc" title="Increase Quantity">
+              <i data-lucide="plus"></i>
+            </button>
+          </div>
+
+          <!-- Action buttons row -->
+          <div class="action-buttons-row">
+            <button class="btn-gold btn-details-bag" id="details-add-to-cart-btn">
+              <i data-lucide="shopping-bag"></i> Add To Bag
+            </button>
+            <button class="btn-outline btn-details-wishlist" id="details-add-to-wishlist-btn" title="Add to Wishlist">
+              <i data-lucide="heart"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Spec Tab List -->
+        <div class="specifications-wrapper">
+          <h3 style="font-family: var(--font-display); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 25px; color: var(--text-primary); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">Item Specifications</h3>
+          <div class="spec-list" id="details-specs-list">
+            <!-- Populated dynamically by product.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RELATED PRODUCTS GRID -->
+    <section class="related-section">
+      <div class="section-header" style="text-align: left; margin-bottom: 45px;">
+        <h2 class="section-title" style="font-size: 1.8rem;">Complementary Pairings</h2>
+        <p class="section-subtitle">Exquisite additions curated for your collection</p>
+      </div>
+      <div class="product-grid" id="related-products-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <!-- Populated dynamically by product.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+        <p class="footer-desc">
+          A premium luxury boutique curated to deliver world-class elegance, unparalleled craftsmanship, and golden-standard retail design.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+          <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-link"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Collections</h4>
+        <ul class="footer-links">
+          <li><a href="index.html?category=Accessories">Luxury Watches</a></li>
+          <li><a href="index.html?category=Apparel">Bespoke Couture</a></li>
+          <li><a href="index.html?category=Fragrances">Exquisite Parfums</a></li>
+          <li><a href="index.html?category=Footwear">Designer Footwear</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="profile.html">My Account</a></li>
+          <li><a href="cart.html">Shopping Bag</a></li>
+          <li><a href="wishlist.html">Saved Wishlist</a></li>
+          <li><a href="admin.html">Concierge Portal</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-newsletter">
+        <h4 class="footer-heading">Newsletter</h4>
+        <p class="newsletter-desc">Subscribe to unlock private sales, new collections, and golden event invitations.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Thank you for subscribing to our luxury newsletter!', 'success');">
+          <input type="email" class="newsletter-input" placeholder="Your premium email" required>
+          <button type="submit" class="newsletter-btn">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 FMD Shopping. Designed to the Gold Standard. All Rights Reserved.</p>
+      <div class="footer-payments">
+        <i data-lucide="credit-card" title="Visa / MasterCard / Amex"></i>
+        <i data-lucide="shield-check" title="100% Secure Checkout"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" id="back-to-top" title="Top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <!-- Lucide CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Master Script -->
+  <script src="script.js"></script>
+  
+  <!-- Page Specific Script -->
+  <script src="product.js"></script>
+</body>
+</html>

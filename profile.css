@@ -1,0 +1,300 @@
+/* 
+ * FMD Shopping - Profile Page Specific Styles
+ * Theme: Executive Dashboard with Golden Accents
+ */
+
+.profile-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: calc(var(--nav-height) + 40px) 40px 80px 40px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+/* LEFT SIDEBAR - USER CARD */
+.profile-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: var(--shadow-dark);
+  height: fit-content;
+}
+
+.profile-avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px auto;
+  border-radius: 50%;
+  border: 2px solid var(--gold-primary);
+  padding: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow-gold);
+}
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.edit-avatar-trigger {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--gold-primary);
+  color: #000000;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.edit-avatar-trigger:hover {
+  background-color: var(--gold-light);
+  transform: scale(1.1);
+}
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.profile-tier-badge {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary));
+  color: #000000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 25px;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+.profile-meta {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 25px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+.profile-meta-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.profile-meta-item span:last-child {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* RIGHT MAIN CONTENT - TABS */
+.profile-main {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-dark);
+}
+
+.profile-tabs-header {
+  display: flex;
+  gap: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 40px;
+}
+.profile-tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  padding: 15px 0;
+  cursor: pointer;
+  position: relative;
+  letter-spacing: 1px;
+  transition: var(--transition-smooth);
+}
+.profile-tab-btn.active, .profile-tab-btn:hover {
+  color: var(--gold-primary);
+}
+.profile-tab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--gold-primary);
+  transition: var(--transition-smooth);
+}
+.profile-tab-btn.active::after {
+  width: 100%;
+}
+
+.profile-tab-content {
+  display: none;
+  animation: tabFadeIn 0.5s ease forwards;
+}
+.profile-tab-content.active {
+  display: block;
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* PAST ORDERS LIST */
+.order-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.order-card {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  transition: var(--transition-smooth);
+}
+.order-card:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: var(--shadow-gold);
+}
+.order-card-header {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.order-id {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--gold-primary);
+}
+.order-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.order-status-pill {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+.order-status-pill.processing {
+  background-color: rgba(212, 175, 55, 0.1);
+  color: var(--gold-primary);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.order-card-body {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.order-summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.order-total-price {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.order-items-summary {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Form layouts within profile */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Empty states */
+.empty-orders {
+  text-align: center;
+  padding: 60px 20px;
+}
+.empty-orders i {
+  color: var(--gold-primary);
+  margin-bottom: 20px;
+}
+
+/* Access Required Redirection screen */
+.access-denied-container {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
+.access-denied-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gold-primary);
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-gold);
+}
+
+/* Responsive adjustment */
+@media (max-width: 1024px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .profile-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .profile-main {
+    padding: 30px 20px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

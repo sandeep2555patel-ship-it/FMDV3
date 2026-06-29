@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Client Registration | FMD Shopping</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Shared Style -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Page Specific Style -->
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-logo">FMD SHOPPING</div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header id="main-header">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html?category=Accessories">Accessories</a>
+        <a href="index.html?category=Apparel">Apparel</a>
+        <a href="index.html?category=Fragrances">Fragrances</a>
+        <a href="admin.html">Admin Portal</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="action-btn" id="search-btn" title="Search Catalog">
+          <i data-lucide="search"></i>
+        </button>
+        <a href="wishlist.html" class="action-btn" title="Saved Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge wishlist-count">0</span>
+        </a>
+        <a href="cart.html" class="action-btn" title="Shopping Bag">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+        
+        <div class="profile-menu-container">
+          <button class="action-btn" id="profile-btn" title="Account Access">
+            <i data-lucide="user"></i>
+          </button>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <div class="profile-dropdown-header">
+              <p id="dropdown-user-name">Guest User</p>
+              <p id="dropdown-user-email">guest@fmdshopping.com</p>
+            </div>
+            <a href="profile.html" class="profile-dropdown-link">
+              <i data-lucide="settings"></i> My Profile
+            </a>
+            <a href="wishlist.html" class="profile-dropdown-link">
+              <i data-lucide="heart"></i> My Wishlist
+            </a>
+            <a href="admin.html" class="profile-dropdown-link">
+              <i data-lucide="shield"></i> Admin Portal
+            </a>
+            <a href="login.html" class="profile-dropdown-link" style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px;" id="dropdown-auth-btn">
+              <i data-lucide="log-in"></i> Access Account
+            </a>
+          </div>
+        </div>
+        
+        <button class="action-btn" id="theme-toggle" title="Switch Theme">
+          <i data-lucide="sun"></i>
+        </button>
+        
+        <button class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-close" id="search-close">&times;</button>
+    <div class="search-container">
+      <form id="search-form">
+        <div class="search-input-wrapper">
+          <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+          <button type="submit" class="search-submit">
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SIGNUP MAIN CONTENT -->
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2 class="auth-brand">FMD<span>.</span> Register</h2>
+        <p class="auth-subtitle">Establish your premium private account</p>
+      </div>
+
+      <!-- Signup form with password strength meter -->
+      <form id="signup-form">
+        <div class="form-group">
+          <label class="form-label" for="signup-name">Full Name</label>
+          <input type="text" id="signup-name" class="form-control" placeholder="e.g. Sterling Archer" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="signup-email">Client Email Address</label>
+          <input type="email" id="signup-email" class="form-control" placeholder="client@luxurydesign.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="signup-phone">Secure Contact Phone</label>
+          <input type="tel" id="signup-phone" class="form-control" placeholder="+1 (555) 000-0000" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="signup-password">Secure Password</label>
+          <input type="password" id="signup-password" class="form-control" placeholder="••••••••••••" required>
+          <!-- Password Strength Meter -->
+          <div class="password-strength-wrapper">
+            <div class="strength-bar-container">
+              <div class="strength-bar" id="strength-meter"></div>
+            </div>
+            <div class="strength-label">Password Protection: <span id="strength-text">Empty</span></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="signup-confirm">Confirm Password</label>
+          <input type="password" id="signup-confirm" class="form-control" placeholder="••••••••••••" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 30px;">
+          <label class="terms-label">
+            <input type="checkbox" id="signup-terms" required>
+            <span class="checkbox-box" style="margin-top: 3px;">
+              <i data-lucide="check"></i>
+            </span>
+            <span class="terms-text">I formally agree to the <a href="#">Terms of Gilded Service</a> and the <a href="#">Luxury Privacy Charter</a> of FMD.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-gold" style="width: 100%;">Create Gilded Profile</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Existing elite member? <a href="login.html">Sign In Here</a></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+        <p class="footer-desc">
+          A premium luxury boutique curated to deliver world-class elegance, unparalleled craftsmanship, and golden-standard retail design.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+          <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-link"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Collections</h4>
+        <ul class="footer-links">
+          <li><a href="index.html?category=Accessories">Luxury Watches</a></li>
+          <li><a href="index.html?category=Apparel">Bespoke Couture</a></li>
+          <li><a href="index.html?category=Fragrances">Exquisite Parfums</a></li>
+          <li><a href="index.html?category=Footwear">Designer Footwear</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="profile.html">My Account</a></li>
+          <li><a href="cart.html">Shopping Bag</a></li>
+          <li><a href="wishlist.html">Saved Wishlist</a></li>
+          <li><a href="admin.html">Concierge Portal</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-newsletter">
+        <h4 class="footer-heading">Newsletter</h4>
+        <p class="newsletter-desc">Subscribe to unlock private sales, new collections, and golden event invitations.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Thank you for subscribing to our luxury newsletter!', 'success');">
+          <input type="email" class="newsletter-input" placeholder="Your premium email" required>
+          <button type="submit" class="newsletter-btn">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 FMD Shopping. Designed to the Gold Standard. All Rights Reserved.</p>
+      <div class="footer-payments">
+        <i data-lucide="credit-card" title="Visa / MasterCard / Amex"></i>
+        <i data-lucide="shield-check" title="100% Secure Checkout"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" id="back-to-top" title="Top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <!-- Lucide CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Master Script -->
+  <script src="script.js"></script>
+  
+  <!-- Page Specific Script -->
+  <script src="signup.js"></script>
+</body>
+</html>

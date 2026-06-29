@@ -1,0 +1,54 @@
+/* 
+ * FMD Shopping - Signup Specific Stylesheet
+ * Imports shared Auth styles and appends specialized registration styles
+ */
+
+@import url('login.css');
+
+/* Custom password strength meter bar */
+.password-strength-wrapper {
+  margin-top: 8px;
+}
+.strength-bar-container {
+  height: 4px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.strength-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #ef4444; /* Weak: Red, Medium: Gold, Strong: Green */
+  transition: var(--transition-smooth);
+}
+.strength-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+.strength-label span {
+  font-weight: 600;
+  color: var(--gold-primary);
+}
+
+/* Signup Terms Agreement row styles */
+.terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.terms-label input {
+  display: none;
+}
+.terms-text {
+  line-height: 1.4;
+}
+.terms-text a {
+  color: var(--gold-primary);
+  font-weight: 500;
+  text-decoration: underline;
+}

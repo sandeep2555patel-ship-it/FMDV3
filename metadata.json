@@ -1,0 +1,6 @@
+{
+  "name": "FMD Shopping",
+  "description": "FMD Shopping is a premium black and gold themed e-commerce experience featuring modern glassmorphism, smooth animations, interactive carts, checkout processes, wishlist management, and a dedicated admin interface.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

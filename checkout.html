@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Gilded Checkout | FMD Shopping</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Shared Style -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Page Specific Style -->
+  <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-logo">FMD SHOPPING</div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header id="main-header">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html?category=Accessories">Accessories</a>
+        <a href="index.html?category=Apparel">Apparel</a>
+        <a href="index.html?category=Fragrances">Fragrances</a>
+        <a href="admin.html">Admin Portal</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="action-btn" id="search-btn" title="Search Catalog">
+          <i data-lucide="search"></i>
+        </button>
+        <a href="wishlist.html" class="action-btn" title="Saved Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge wishlist-count">0</span>
+        </a>
+        <a href="cart.html" class="action-btn" title="Shopping Bag">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+        
+        <div class="profile-menu-container">
+          <button class="action-btn" id="profile-btn" title="Account Access">
+            <i data-lucide="user"></i>
+          </button>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <div class="profile-dropdown-header">
+              <p id="dropdown-user-name">Guest User</p>
+              <p id="dropdown-user-email">guest@fmdshopping.com</p>
+            </div>
+            <a href="profile.html" class="profile-dropdown-link">
+              <i data-lucide="settings"></i> My Profile
+            </a>
+            <a href="wishlist.html" class="profile-dropdown-link">
+              <i data-lucide="heart"></i> My Wishlist
+            </a>
+            <a href="admin.html" class="profile-dropdown-link">
+              <i data-lucide="shield"></i> Admin Portal
+            </a>
+            <a href="login.html" class="profile-dropdown-link" style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px;" id="dropdown-auth-btn">
+              <i data-lucide="log-in"></i> Access Account
+            </a>
+          </div>
+        </div>
+        
+        <button class="action-btn" id="theme-toggle" title="Switch Theme">
+          <i data-lucide="sun"></i>
+        </button>
+        
+        <button class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-close" id="search-close">&times;</button>
+    <div class="search-container">
+      <form id="search-form">
+        <div class="search-input-wrapper">
+          <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+          <button type="submit" class="search-submit">
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CHECKOUT CONTENT BODY -->
+  <main class="checkout-wrapper">
+    <div class="wishlist-header">
+      <h1 class="brand-logo" style="font-size: 2.2rem; display: inline-block;">Secured Checkout</h1>
+      <p style="color: var(--text-secondary); margin-top: 10px; font-size: 0.9rem;">Finalize your gilded retail commission order below</p>
+    </div>
+
+    <form id="checkout-master-form">
+      <div class="checkout-grid">
+        <!-- LEFT COLUMN: STEPS -->
+        <div class="checkout-steps">
+          
+          <!-- STEP 1: SHIPPING & CONTACT COORDINATES -->
+          <div class="checkout-step-card">
+            <div class="step-header">
+              <div class="step-number">1</div>
+              <h2 class="step-title">Shipping Coordinates</h2>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="chk-name">Full Client Name</label>
+                <input type="text" id="chk-name" class="form-control" placeholder="Alexander Mercer" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="chk-phone">Secure Contact Phone</label>
+                <input type="tel" id="chk-phone" class="form-control" placeholder="+1 (555) 777-8888" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="chk-email">Notification Email Address</label>
+              <input type="email" id="chk-email" class="form-control" placeholder="alexander@mercerluxury.com" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="chk-street">Street Address</label>
+              <input type="text" id="chk-street" class="form-control" placeholder="100 Gilded Lane, Suite 24k" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="chk-city">City</label>
+                <input type="text" id="chk-city" class="form-control" placeholder="New York" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="chk-zip">Postal Zip Code</label>
+                <input type="text" id="chk-zip" class="form-control" placeholder="10021" required>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="chk-country">Country</label>
+              <input type="text" id="chk-country" class="form-control" placeholder="United States" required>
+            </div>
+          </div>
+
+          <!-- STEP 2: COURIER SPEED -->
+          <div class="checkout-step-card">
+            <div class="step-header">
+              <div class="step-number">2</div>
+              <h2 class="step-title">Courier Logistics</h2>
+            </div>
+
+            <div class="delivery-options-grid">
+              <!-- Option A (Free) -->
+              <label class="delivery-option active" id="label-delivery-std">
+                <input type="radio" name="delivery-speed" value="standard" class="delivery-radio" checked id="radio-delivery-std">
+                <div class="delivery-info">
+                  <span class="delivery-name">Complementary Gilded Air Courier (Free)</span>
+                  <span class="delivery-desc">Expected arrival in 2-3 business days. Sealed security wrap included.</span>
+                </div>
+              </label>
+
+              <!-- Option B (+$50) -->
+              <label class="delivery-option" id="label-delivery-overnight">
+                <input type="radio" name="delivery-speed" value="platinum" class="delivery-radio" id="radio-delivery-overnight">
+                <div class="delivery-info">
+                  <span class="delivery-name">Platinum VIP Overnight Bullet Delivery (+$50)</span>
+                  <span class="delivery-desc">Guaranteed hand-delivered by an FMD courier tomorrow. Private signature verification.</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- STEP 3: MOCK PAYMENT PANEL -->
+          <div class="checkout-step-card">
+            <div class="step-header">
+              <div class="step-number">3</div>
+              <h2 class="step-title">Premium Payment Method</h2>
+            </div>
+
+            <!-- Virtual Credit Card Mock Preview -->
+            <div class="credit-card-mock">
+              <div class="card-brand-logo">FMD GOLD</div>
+              <div class="card-number-mock" id="card-num-preview">•••• •••• •••• ••••</div>
+              <div class="card-meta-mock">
+                <div class="card-holder-mock">
+                  Cardholder
+                  <span id="card-name-preview">James Sterling</span>
+                </div>
+                <div class="card-expiry-mock">
+                  Expires
+                  <span id="card-expiry-preview">12/29</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fields -->
+            <div class="form-group">
+              <label class="form-label" for="pay-cardholder">Cardholder Name</label>
+              <input type="text" id="pay-cardholder" class="form-control" placeholder="James Sterling" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="pay-cardnumber">Secure Card Number</label>
+              <input type="text" id="pay-cardnumber" class="form-control" placeholder="4111 2222 3333 4444" required autocomplete="off" maxlength="19">
+            </div>
+
+            <div class="form-row" style="margin-bottom: 0;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="pay-expiry">Expiration Date</label>
+                <input type="text" id="pay-expiry" class="form-control" placeholder="MM/YY" required autocomplete="off" maxlength="5">
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="pay-cvv">Security CVV</label>
+                <input type="password" id="pay-cvv" class="form-control" placeholder="•••" required autocomplete="off" maxlength="3">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: INVOICE GRAND DRAWERS -->
+        <div class="checkout-summary-panel">
+          <h2 class="summary-heading">Invoice Commission</h2>
+          
+          <!-- List of items currently checking out -->
+          <div class="checkout-items-drawer" id="checkout-items-list">
+            <!-- Populated dynamically by checkout.js -->
+          </div>
+
+          <div class="summary-row">
+            <span>Bag Subtotal</span>
+            <span id="chk-subtotal">$0</span>
+          </div>
+
+          <div class="summary-row" id="chk-shipping-row">
+            <span>Courier Speed</span>
+            <span id="chk-shipping-val" style="color: var(--gold-primary); font-weight: 600;">COMPLEMENTARY</span>
+          </div>
+
+          <div class="summary-row" id="chk-discount-row" style="display: none; color: #22c55e;">
+            <span>VIP Privilege Privilege (15%)</span>
+            <span id="chk-discount-val">-$0</span>
+          </div>
+
+          <div class="summary-row grand-total-row">
+            <span>Grand Total Due</span>
+            <span id="chk-grandtotal">$0</span>
+          </div>
+
+          <button type="submit" class="btn-gold" style="width: 100%; margin-top: 30px;" id="chk-submit-btn">
+            Submit Gilded Commission
+          </button>
+
+          <p style="font-size: 0.7rem; color: var(--text-secondary); text-align: center; margin-top: 20px; line-height: 1.5;">
+            By finalizing, you formally bind this commission to your private shipping credentials. Secure verification is required on delivery.
+          </p>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <!-- SUCCESS DIALOG MODAL -->
+  <div class="success-overlay" id="success-overlay-container">
+    <div class="success-card">
+      <div class="success-icon-wrapper">
+        <i data-lucide="check" style="width: 40px; height: 40px;"></i>
+      </div>
+      
+      <h2 class="success-title">Commission Sealed</h2>
+      <p class="success-subtitle">
+        Your premium purchase has been successfully validated. A luxury certified gold-seal invoice receipt has been securely logged to your private client portal.
+      </p>
+
+      <div class="success-receipt-box">
+        <div class="receipt-line">
+          <span>Transaction Hash:</span>
+          <span style="color: var(--text-primary); font-weight: 600;" id="success-tx-hash">FMD-TX-39284210</span>
+        </div>
+        <div class="receipt-line">
+          <span>Courier Delivery:</span>
+          <span id="success-receipt-delivery">Express Gilded Air</span>
+        </div>
+        <div class="receipt-line">
+          <span>Account Holder:</span>
+          <span id="success-receipt-client">James Sterling</span>
+        </div>
+        <div class="receipt-line">
+          <span>Amount Authenticated:</span>
+          <span id="success-receipt-amount">$1,250.00</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 15px; justify-content: center;">
+        <a href="profile.html" class="btn-gold" style="font-size: 0.8rem; padding: 12px 25px;">Go To Dashboard</a>
+        <a href="index.html" class="btn-outline" style="font-size: 0.8rem; padding: 12px 25px;">Back to Catalog</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="brand-logo">FMD<span>.</span></a>
+        <p class="footer-desc">
+          A premium luxury boutique curated to deliver world-class elegance, unparalleled craftsmanship, and golden-standard retail design.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+          <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-link"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Collections</h4>
+        <ul class="footer-links">
+          <li><a href="index.html?category=Accessories">Luxury Watches</a></li>
+          <li><a href="index.html?category=Apparel">Bespoke Couture</a></li>
+          <li><a href="index.html?category=Fragrances">Exquisite Parfums</a></li>
+          <li><a href="index.html?category=Footwear">Designer Footwear</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="profile.html">My Account</a></li>
+          <li><a href="cart.html">Shopping Bag</a></li>
+          <li><a href="wishlist.html">Saved Wishlist</a></li>
+          <li><a href="admin.html">Concierge Portal</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-newsletter">
+        <h4 class="footer-heading">Newsletter</h4>
+        <p class="newsletter-desc">Subscribe to unlock private sales, new collections, and golden event invitations.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Thank you for subscribing to our luxury newsletter!', 'success');">
+          <input type="email" class="newsletter-input" placeholder="Your premium email" required>
+          <button type="submit" class="newsletter-btn">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 FMD Shopping. Designed to the Gold Standard. All Rights Reserved.</p>
+      <div class="footer-payments">
+        <i data-lucide="credit-card" title="Visa / MasterCard / Amex"></i>
+        <i data-lucide="shield-check" title="100% Secure Checkout"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" id="back-to-top" title="Top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <!-- Lucide CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Master Script -->
+  <script src="script.js"></script>
+  
+  <!-- Page Specific Script -->
+  <script src="checkout.js"></script>
+</body>
+</html>

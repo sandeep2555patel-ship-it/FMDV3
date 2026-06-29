@@ -1,0 +1,217 @@
+/* 
+ * FMD Shopping - Auth Pages (Login & Signup) Specific Styles
+ * Theme: Glassmorphism Card on Obsidian Canvas
+ */
+
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: calc(var(--nav-height) + 40px) 20px 80px 20px;
+  position: relative;
+}
+
+/* Luxury Ambient Background Glows */
+.auth-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+.auth-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 15%;
+  right: 20%;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(170, 124, 17, 0.05) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.auth-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--border-radius-lg);
+  padding: 50px 40px;
+  box-shadow: var(--shadow-dark), var(--shadow-gold);
+  animation: authCardEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes authCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.auth-brand {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
+.auth-brand span {
+  color: var(--gold-primary);
+}
+.auth-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+/* Premium Divider */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 30px 0;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.auth-divider::before, .auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.auth-divider:not(:empty)::before {
+  margin-right: .75em;
+}
+.auth-divider:not(:empty)::after {
+  margin-left: .75em;
+}
+
+/* Google Sign In UI Mock Button */
+.btn-google {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius-sm);
+  color: #ffffff;
+  padding: 14px 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+[data-theme="light"] .btn-google {
+  background: #ffffff;
+  border-color: #d1d1d1;
+  color: #1a1a1a;
+}
+.btn-google:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+.google-icon-svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Auth helpers layout */
+.auth-helper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -10px;
+  margin-bottom: 30px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.custom-checkbox input {
+  display: none;
+}
+.checkbox-box {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+.custom-checkbox input:checked + .checkbox-box {
+  background: var(--gold-primary);
+  border-color: var(--gold-primary);
+}
+.checkbox-box i {
+  color: #000000;
+  display: none;
+}
+.custom-checkbox input:checked + .checkbox-box i {
+  display: block;
+}
+
+.forgot-link {
+  color: var(--text-secondary);
+  transition: var(--transition-smooth);
+}
+.forgot-link:hover {
+  color: var(--gold-primary);
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 35px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.auth-footer a {
+  color: var(--gold-primary);
+  font-weight: 600;
+  margin-left: 5px;
+  border-bottom: 1px solid transparent;
+}
+.auth-footer a:hover {
+  border-bottom: 1px solid var(--gold-primary);
+}
+
+/* Responsive adjustment */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 40px 20px;
+  }
+}
