@@ -276,6 +276,25 @@ function initSearchOverlay() {
         }
       });
     }
+
+    const searchClear = document.getElementById("search-clear");
+    if (searchInput && searchClear) {
+      searchInput.addEventListener("input", () => {
+        searchClear.style.display = searchInput.value.length > 0 ? "flex" : "none";
+      });
+      searchClear.addEventListener("click", () => {
+        searchInput.value = "";
+        searchClear.style.display = "none";
+        searchInput.focus();
+      });
+    }
+
+    const searchMic = document.querySelector(".search-mic");
+    if (searchMic) {
+      searchMic.addEventListener("click", () => {
+        showToast("Voice search is currently unavailable.", "info");
+      });
+    }
   }
 }
 

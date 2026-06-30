@@ -91,13 +91,20 @@
   <div class="search-overlay" id="search-overlay">
     <button class="search-close" id="search-close">&times;</button>
     <div class="search-container">
-      <form id="search-form">
-        <div class="search-input-wrapper">
-          <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+      <form id="search-form" class="yt-search-form">
+        <div class="yt-search-group">
+          <div class="search-input-wrapper">
+            <div class="search-icon-inside"><i data-lucide="search"></i></div>
+            <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+            <button type="button" class="search-clear" id="search-clear" style="display: none;"><i data-lucide="x"></i></button>
+          </div>
           <button type="submit" class="search-submit">
-            <i data-lucide="arrow-right"></i>
+            <i data-lucide="search"></i>
           </button>
         </div>
+        <button type="button" class="search-mic" title="Search with your voice">
+          <i data-lucide="mic"></i>
+        </button>
       </form>
     </div>
   </div>

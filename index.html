@@ -193,39 +193,51 @@
     .deal-card {
       min-width: 260px;
       background: var(--bg-secondary);
-      border: 1px solid rgba(226, 160, 36, 0.15);
+      border: 1px solid rgba(226, 160, 36, 0.1);
       border-radius: var(--border-radius-md);
       overflow: hidden;
       scroll-snap-align: start;
       position: relative;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     }
     .deal-card:hover {
-      border-color: var(--gold-primary);
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      border-color: rgba(226, 160, 36, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 5px 15px rgba(226, 160, 36, 0.1);
     }
     .deal-img {
       width: 100%;
       height: 200px;
       object-fit: cover;
       border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .deal-card:hover .deal-img {
+      transform: scale(1.05);
     }
     .deal-info {
       padding: 15px;
+      background: linear-gradient(to top, rgba(15,15,15,1), rgba(20,20,20,0.9));
+      position: relative;
+      z-index: 2;
     }
     .deal-badge {
       position: absolute;
-      top: 10px;
-      left: 10px;
-      background: #ef4444;
+      top: 12px;
+      left: 12px;
+      background: rgba(239, 68, 68, 0.9);
+      backdrop-filter: blur(4px);
       color: #fff;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 700;
-      padding: 4px 8px;
+      letter-spacing: 1px;
+      padding: 6px 10px;
       border-radius: 4px;
       text-transform: uppercase;
+      z-index: 5;
+      box-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
     }
     .deal-name {
       font-size: 0.9rem;
@@ -291,35 +303,38 @@
     }
     .product-card {
       background-color: var(--bg-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: var(--border-radius-lg);
+      border: 1px solid rgba(226, 160, 36, 0.1);
+      border-radius: var(--border-radius-md);
       overflow: hidden;
       position: relative;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: var(--shadow-dark);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
       display: flex;
       flex-direction: column;
     }
     .product-card:hover {
-      transform: translateY(-10px) scale(1.02);
+      transform: translateY(-8px);
       border-color: rgba(226, 160, 36, 0.4);
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 5px 20px rgba(226, 160, 36, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(226, 160, 36, 0.15);
     }
     .product-img-wrapper {
       position: relative;
-      height: 320px;
+      padding-top: 120%; /* 5:6 Aspect Ratio */
       width: 100%;
       overflow: hidden;
-      background-color: #1a1a1a;
+      background-color: #111;
     }
     .product-img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     .product-card:hover .product-img {
-      transform: scale(1.08);
+      transform: scale(1.05);
     }
     .product-actions-overlay {
       position: absolute;
@@ -329,53 +344,66 @@
       flex-direction: column;
       gap: 10px;
       z-index: 3;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.3s ease;
+    }
+    .product-card:hover .product-actions-overlay {
+      opacity: 1;
+      transform: translateX(0);
     }
     .p-action-btn {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: rgba(10, 10, 10, 0.7);
-      border: 1px solid rgba(226, 160, 36, 0.3);
+      background: rgba(15, 15, 15, 0.8);
+      border: 1px solid rgba(226, 160, 36, 0.2);
       color: var(--text-primary);
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
     }
     .p-action-btn:hover {
       background: var(--gold-primary);
       color: #000000;
       border-color: var(--gold-primary);
-      box-shadow: 0 0 15px rgba(226, 160, 36, 0.5);
       transform: scale(1.1);
     }
     .p-action-btn.wishlisted {
       color: var(--gold-primary);
-      background: rgba(226, 160, 36, 0.1);
     }
     .p-action-btn.wishlisted:hover {
-      color: #ffffff;
+      color: #000000;
+    }
+    .p-action-btn.wishlisted i {
+      fill: var(--gold-primary);
+    }
+    .p-action-btn.wishlisted:hover i {
+      fill: #000000;
     }
     .product-info-wrapper {
       padding: 24px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+      background: linear-gradient(to top, rgba(15,15,15,1) 0%, rgba(20,20,20,0.8) 100%);
     }
     .product-cat {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       color: var(--gold-primary);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       font-weight: 600;
     }
     .product-name-link {
       font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: 500;
       color: var(--text-primary);
       margin-bottom: 12px;
       line-height: 1.4;
@@ -387,29 +415,29 @@
       transition: color 0.3s ease;
     }
     .product-name-link:hover {
-      color: var(--gold-primary);
+      color: var(--gold-light);
     }
     .product-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: auto;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 18px;
+      border-top: 1px solid rgba(226, 160, 36, 0.1);
+      padding-top: 20px;
     }
     .product-price {
       font-family: var(--font-display);
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: var(--gold-primary);
       letter-spacing: 0.5px;
     }
     .quick-add-bag {
       background: transparent;
-      border: 1.5px solid rgba(226, 160, 36, 0.4);
+      border: 1px solid rgba(226, 160, 36, 0.4);
       color: var(--gold-primary);
-      font-size: 0.7rem;
-      font-weight: 700;
+      font-size: 0.75rem;
+      font-weight: 600;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       padding: 10px 20px;
@@ -418,13 +446,12 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s ease;
     }
     .quick-add-bag:hover {
-      background: var(--gold-primary);
-      color: #000000;
+      background: rgba(226, 160, 36, 0.1);
       border-color: var(--gold-primary);
-      box-shadow: 0 4px 15px rgba(226, 160, 36, 0.3);
+      box-shadow: 0 4px 15px rgba(226, 160, 36, 0.2);
       transform: translateY(-2px);
     }
     .quick-add-bag:active {
@@ -650,13 +677,20 @@
   <div class="search-overlay" id="search-overlay">
     <button class="search-close" id="search-close">&times;</button>
     <div class="search-container">
-      <form id="search-form">
-        <div class="search-input-wrapper">
-          <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+      <form id="search-form" class="yt-search-form">
+        <div class="yt-search-group">
+          <div class="search-input-wrapper">
+            <div class="search-icon-inside"><i data-lucide="search"></i></div>
+            <input type="text" id="search-input" class="search-input" placeholder="Search premium items..." autocomplete="off">
+            <button type="button" class="search-clear" id="search-clear" style="display: none;"><i data-lucide="x"></i></button>
+          </div>
           <button type="submit" class="search-submit">
-            <i data-lucide="arrow-right"></i>
+            <i data-lucide="search"></i>
           </button>
         </div>
+        <button type="button" class="search-mic" title="Search with your voice">
+          <i data-lucide="mic"></i>
+        </button>
       </form>
     </div>
   </div>
