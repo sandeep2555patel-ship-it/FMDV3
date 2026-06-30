@@ -14,231 +14,242 @@
   
   <!-- Page Specific Style Additions -->
   <style>
-    /* Hero Banner Split Layout */
-    .hero {
-      min-height: 95vh;
+    /* Amazon/Flipkart Style Category Strip */
+    .amz-category-strip {
       display: flex;
+      gap: 30px;
+      padding: calc(var(--nav-height) + 20px) 40px 20px 40px;
+      overflow-x: auto;
+      scrollbar-width: none; /* Firefox */
+      background: var(--bg-secondary);
+      border-bottom: 1px solid rgba(226, 160, 36, 0.15);
+      justify-content: flex-start;
       align-items: center;
-      padding: calc(var(--nav-height) + 60px) 40px 80px 40px;
-      max-width: 1400px;
-      margin: 0 auto;
-      gap: 80px;
     }
-    .hero-content {
-      flex: 1.2;
-      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+    @media (min-width: 1024px) {
+      .amz-category-strip {
+        justify-content: center;
+      }
     }
-    .hero-subtitle {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      color: var(--gold-primary);
-      font-weight: 700;
-      margin-bottom: 25px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
+    .amz-category-strip::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
     }
-    .hero-subtitle::before, .hero-subtitle::after {
-      content: '';
-      display: block;
-      width: 40px;
-      height: 1px;
-      background-color: var(--gold-primary);
-    }
-    .hero-title {
-      font-size: clamp(3rem, 6vw, 4.5rem);
-      line-height: 1.05;
-      font-weight: 800;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-    }
-    .hero-title span {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 4px 15px rgba(226, 160, 36, 0.2);
-    }
-    .hero-desc {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 50px;
-      max-width: 550px;
-      font-weight: 400;
-    }
-    .hero-btns {
+    .amz-cat-item {
       display: flex;
-      gap: 25px;
+      flex-direction: column;
       align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      min-width: 80px;
+      transition: transform 0.3s ease;
     }
-    .hero-image-wrapper {
-      flex: 0.8;
-      position: relative;
+    .amz-cat-item:hover {
+      transform: translateY(-3px);
+    }
+    .amz-cat-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 2px solid rgba(226, 160, 36, 0.3);
       display: flex;
       justify-content: center;
       align-items: center;
-      animation: fadeInScale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hero-image-container {
-      width: 100%;
-      height: 550px;
-      border-radius: var(--border-radius-lg);
-      border: 1px solid rgba(226, 160, 36, 0.3);
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(226, 160, 36, 0.15);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+    .amz-cat-item:hover .amz-cat-icon {
+      border-color: var(--gold-primary);
+      box-shadow: 0 6px 15px rgba(226, 160, 36, 0.2);
+    }
+    .amz-cat-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .amz-cat-icon i {
+      color: var(--gold-primary);
+      width: 28px;
+      height: 28px;
+    }
+    .amz-cat-item span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    /* Amazon Style Wide Hero Carousel */
+    .amz-hero-carousel {
+      width: 100%;
+      height: 500px;
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
       position: relative;
     }
-    .hero-image-container::before {
+    @media (max-width: 768px) {
+      .amz-hero-carousel {
+        height: 350px;
+      }
+    }
+    .amz-hero-carousel::-webkit-scrollbar {
+      display: none;
+    }
+    .amz-hero-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+    }
+    .amz-hero-slide img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .amz-hero-slide::after {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to top, rgba(10,10,10,0.8), transparent);
+      background: linear-gradient(to right, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.4) 50%, transparent 100%);
       z-index: 2;
     }
-    .hero-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hero-image-container:hover .hero-img {
-      transform: scale(1.1) rotate(1deg);
-    }
-    .hero-badge {
-      position: absolute;
-      bottom: -30px;
-      right: -30px;
-      background: rgba(10, 10, 10, 0.85);
-      border: 1.5px solid var(--gold-primary);
-      padding: 24px 36px;
-      border-radius: var(--border-radius-md);
-      backdrop-filter: blur(12px);
-      text-align: center;
+    .amz-hero-overlay {
+      position: relative;
       z-index: 3;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(226, 160, 36, 0.2);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0 60px;
+      max-width: 800px;
     }
-    .hero-badge:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(226, 160, 36, 0.3);
+    @media (max-width: 768px) {
+      .amz-hero-overlay {
+        padding: 0 30px;
+      }
     }
-    .hero-badge p:first-child {
-      font-family: var(--font-display);
-      color: var(--gold-primary);
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-    .hero-badge p:last-child {
-      font-size: 0.75rem;
+    .amz-hero-overlay h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+    }
+    .amz-hero-overlay p {
+      font-size: 1.1rem;
       color: var(--text-secondary);
-      font-weight: 600;
+      margin-bottom: 30px;
+      max-width: 500px;
+      line-height: 1.6;
     }
 
-    /* Category Showcase Cards */
-    .categories-section {
-      padding: 100px 40px;
+    /* Horizontal Deals Row */
+    .deals-row-wrapper {
+      padding: 60px 40px;
       max-width: 1400px;
       margin: 0 auto;
     }
-    .section-header {
-      text-align: center;
-      margin-bottom: 70px;
-    }
-    .section-title {
-      font-size: 2.5rem;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      position: relative;
-      display: inline-block;
-      padding-bottom: 15px;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-    }
-    .section-subtitle {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 35px;
-    }
-    .category-card {
-      position: relative;
-      height: 380px;
-      border-radius: var(--border-radius-lg);
-      overflow: hidden;
-      border: 1px solid rgba(226, 160, 36, 0.2);
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .category-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(226, 160, 36, 0.2);
-      border-color: rgba(226, 160, 36, 0.5);
-    }
-    .category-card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .category-card:hover .category-card-img {
-      transform: scale(1.1);
-    }
-    .category-card-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, rgba(10,10,10,0.95) 10%, rgba(10,10,10,0.4) 50%, transparent);
+    .deals-row-header {
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 35px 30px;
-      z-index: 2;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 25px;
+      border-bottom: 1px solid rgba(226, 160, 36, 0.2);
+      padding-bottom: 15px;
     }
-    .category-name {
-      font-family: var(--font-display);
+    .deals-row-title {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 10px;
-      transition: color 0.3s ease;
-    }
-    .category-card:hover .category-name {
-      color: var(--gold-primary);
-    }
-    .category-count {
-      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--gold-primary);
-      font-weight: 600;
+      letter-spacing: 1px;
     }
+    .deals-row-title span {
+      color: var(--gold-primary);
+    }
+    .deals-row {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding-bottom: 20px;
+    }
+    .deals-row::-webkit-scrollbar {
+      display: none;
+    }
+    .deal-card {
+      min-width: 260px;
+      background: var(--bg-secondary);
+      border: 1px solid rgba(226, 160, 36, 0.15);
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      scroll-snap-align: start;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .deal-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .deal-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .deal-info {
+      padding: 15px;
+    }
+    .deal-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .deal-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .deal-price {
+      font-size: 1.1rem;
+      font-family: var(--font-display);
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
+    .deal-price strike {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      margin-left: 8px;
+    }
+
+
+
 
     /* Product Grid Section */
     .products-section {
@@ -650,66 +661,138 @@
     </div>
   </div>
 
-  <!-- HERO BANNER -->
+  <!-- AMAZON/FLIPKART STYLE CATEGORY STRIP -->
   <main>
-    <section class="hero">
-      <div class="hero-content">
-        <span class="hero-subtitle">The Golden Standard of Retail</span>
-        <h1 class="hero-title">Experience <span>True Luxury</span> Shopping</h1>
-        <p class="hero-desc">Curated haute couture, timepieces, and fragrances designed to project prestige and power. Discover unparalleled quality with bespoke service and worldwide next-day express delivery.</p>
-        <div class="hero-btns">
-          <a href="#catalog-start" class="btn-gold">Explore Catalog</a>
-          <a href="index.html?category=Accessories" class="btn-outline">Shop Accessories</a>
+    <div class="amz-category-strip">
+      <div class="amz-cat-item" onclick="window.location.href='index.html?category=all'">
+        <div class="amz-cat-icon"><i data-lucide="grid"></i></div>
+        <span>All</span>
+      </div>
+      <div class="amz-cat-item" onclick="window.location.href='index.html?category=Accessories'">
+        <div class="amz-cat-icon"><img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=150&auto=format&fit=crop" alt="Accessories"></div>
+        <span>Accessories</span>
+      </div>
+      <div class="amz-cat-item" onclick="window.location.href='index.html?category=Apparel'">
+        <div class="amz-cat-icon"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=150&auto=format&fit=crop" alt="Apparel"></div>
+        <span>Apparel</span>
+      </div>
+      <div class="amz-cat-item" onclick="window.location.href='index.html?category=Fragrances'">
+        <div class="amz-cat-icon"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=150&auto=format&fit=crop" alt="Fragrances"></div>
+        <span>Fragrances</span>
+      </div>
+      <div class="amz-cat-item" onclick="window.location.href='index.html?category=Footwear'">
+        <div class="amz-cat-icon"><img src="https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?q=80&w=150&auto=format&fit=crop" alt="Footwear"></div>
+        <span>Footwear</span>
+      </div>
+      <div class="amz-cat-item" onclick="window.location.href='index.html?category=Watches'">
+        <div class="amz-cat-icon"><img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=150&auto=format&fit=crop" alt="Watches"></div>
+        <span>Watches</span>
+      </div>
+      <div class="amz-cat-item" onclick="window.location.href='index.html?category=Bags'">
+        <div class="amz-cat-icon"><img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=150&auto=format&fit=crop" alt="Bags"></div>
+        <span>Bags</span>
+      </div>
+    </div>
+
+    <!-- WIDE HERO CAROUSEL -->
+    <section class="amz-hero-carousel" id="main-hero-carousel">
+      <div class="amz-hero-slide">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1600&auto=format&fit=crop" alt="Luxury Display">
+        <div class="amz-hero-overlay">
+          <h2>The Golden Standard of Retail</h2>
+          <p>Curated haute couture, timepieces, and fragrances designed to project prestige and power. Discover unparalleled quality with bespoke service and worldwide express delivery.</p>
+          <div style="display: flex; gap: 20px;">
+            <button class="btn-gold" onclick="window.location.href='#catalog-start'">Explore Catalog</button>
+            <button class="btn-outline" onclick="window.location.href='index.html?category=Accessories'">Shop Accessories</button>
+          </div>
         </div>
       </div>
-      <div class="hero-image-wrapper">
-        <div class="hero-image-container">
-          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" class="hero-img" alt="Luxury Showroom Display">
-        </div>
-        <div class="hero-badge">
-          <p>24k</p>
-          <p>Standard Quality</p>
+      <div class="amz-hero-slide">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop" alt="Apparel Banner">
+        <div class="amz-hero-overlay">
+          <h2>Exclusive Arrivals</h2>
+          <p>Redefining elegance with our latest collection. Experience the perfect blend of modern design and timeless craftsmanship.</p>
+          <button class="btn-gold" onclick="window.location.href='index.html?category=Apparel'">View Collection</button>
         </div>
       </div>
     </section>
 
-    <!-- CATEGORIES SECTION -->
-    <section class="categories-section">
-      <div class="section-header">
-        <h2 class="section-title">The Curated Curries</h2>
-        <p class="section-subtitle">Delineated genres of luxury styling items</p>
+    <script>
+      // Auto-scroll hero carousel
+      document.addEventListener('DOMContentLoaded', () => {
+        const carousel = document.getElementById('main-hero-carousel');
+        if (!carousel) return;
+        let slideIndex = 0;
+        const slides = carousel.querySelectorAll('.amz-hero-slide');
+        
+        setInterval(() => {
+          if (slides.length <= 1) return;
+          slideIndex = (slideIndex + 1) % slides.length;
+          const slideWidth = slides[0].offsetWidth;
+          carousel.scrollTo({
+            left: slideWidth * slideIndex,
+            behavior: 'smooth'
+          });
+        }, 5000);
+      });
+    </script>
+
+    <!-- HORIZONTAL DEALS ROW -->
+    <section class="deals-row-wrapper">
+      <div class="deals-row-header">
+        <h2 class="deals-row-title">Today's <span>Exclusive Deals</span></h2>
+        <button class="btn-outline" style="padding: 8px 20px; font-size: 0.8rem;" onclick="window.location.href='#catalog-start'">View All</button>
       </div>
-      <div class="category-grid">
-        <div class="category-card" onclick="window.location.href='index.html?category=Accessories'">
-          <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400&auto=format&fit=crop" class="category-card-img" alt="Luxury Watches">
-          <div class="category-card-overlay">
-            <h3 class="category-name">Accessories</h3>
-            <span class="category-count">Chronographs & Pens</span>
+      <div class="deals-row">
+        <!-- Deal 1 -->
+        <div class="deal-card" onclick="window.location.href='product.html?id=1'">
+          <div class="deal-badge">30% OFF</div>
+          <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=400&auto=format&fit=crop" class="deal-img" alt="Watch">
+          <div class="deal-info">
+            <h3 class="deal-name">Midnight Obsidian Chronograph</h3>
+            <div class="deal-price">$8,500 <strike>$12,500</strike></div>
           </div>
         </div>
-        <div class="category-card" onclick="window.location.href='index.html?category=Apparel'">
-          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=400&auto=format&fit=crop" class="category-card-img" alt="Luxury Apparel">
-          <div class="category-card-overlay">
-            <h3 class="category-name">Apparel</h3>
-            <span class="category-count">Bespoke Couture</span>
+        <!-- Deal 2 -->
+        <div class="deal-card" onclick="window.location.href='product.html?id=4'">
+          <div class="deal-badge">Hot Deal</div>
+          <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=400&auto=format&fit=crop" class="deal-img" alt="Fragrance">
+          <div class="deal-info">
+            <h3 class="deal-name">Oud Royale Extrait de Parfum</h3>
+            <div class="deal-price">$450 <strike>$600</strike></div>
           </div>
         </div>
-        <div class="category-card" onclick="window.location.href='index.html?category=Fragrances'">
-          <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=400&auto=format&fit=crop" class="category-card-img" alt="Fine Fragrances">
-          <div class="category-card-overlay">
-            <h3 class="category-name">Fragrances</h3>
-            <span class="category-count">Exquisite Oud & Amber</span>
+        <!-- Deal 3 -->
+        <div class="deal-card" onclick="window.location.href='product.html?id=5'">
+          <div class="deal-badge">Last Chance</div>
+          <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" class="deal-img" alt="Shoes">
+          <div class="deal-info">
+            <h3 class="deal-name">Crimson Velvet Stilettos</h3>
+            <div class="deal-price">$780 <strike>$950</strike></div>
           </div>
         </div>
-        <div class="category-card" onclick="window.location.href='index.html?category=Footwear'">
-          <img src="https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?q=80&w=400&auto=format&fit=crop" class="category-card-img" alt="Luxury Footwear">
-          <div class="category-card-overlay">
-            <h3 class="category-name">Footwear</h3>
-            <span class="category-count">Designer Heels & Stilettos</span>
+        <!-- Deal 4 -->
+        <div class="deal-card" onclick="window.location.href='product.html?id=2'">
+          <div class="deal-badge">Save $1000</div>
+          <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=400&auto=format&fit=crop" class="deal-img" alt="Bag">
+          <div class="deal-info">
+            <h3 class="deal-name">Monogram Signature Briefcase</h3>
+            <div class="deal-price">$3,200 <strike>$4,200</strike></div>
+          </div>
+        </div>
+        <!-- Deal 5 -->
+        <div class="deal-card" onclick="window.location.href='product.html?id=6'">
+          <div class="deal-badge">20% OFF</div>
+          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=400&auto=format&fit=crop" class="deal-img" alt="Apparel">
+          <div class="deal-info">
+            <h3 class="deal-name">Cashmere Blend Overcoat</h3>
+            <div class="deal-price">$2,100 <strike>$2,600</strike></div>
           </div>
         </div>
       </div>
     </section>
+
+
 
     <!-- MAIN PRODUCT CATALOG SECTION -->
     <section class="products-section" id="catalog-start">
