@@ -23,46 +23,47 @@
 .empty-wishlist {
   grid-column: 1 / -1;
   text-align: center;
-  padding: 80px 20px;
+  padding: 100px 20px;
   background: var(--bg-secondary);
-  border: 1px dashed var(--glass-border);
+  border: 1px dashed rgba(226, 160, 36, 0.4);
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-dark);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 .empty-wishlist-icon {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  border: 1px solid var(--gold-primary);
+  border: 1.5px solid var(--gold-primary);
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--gold-primary);
-  margin: 0 auto 25px auto;
-  box-shadow: var(--shadow-gold);
+  margin: 0 auto 30px auto;
+  box-shadow: 0 0 20px rgba(226, 160, 36, 0.2);
+  background: rgba(226, 160, 36, 0.05);
 }
 
 /* Wishlist Item Card (reuses some product-card styles) */
 .wishlist-card {
   background-color: var(--bg-secondary);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
   position: relative;
-  transition: var(--transition-smooth);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: var(--shadow-dark);
   display: flex;
   flex-direction: column;
 }
 .wishlist-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--gold-primary);
-  box-shadow: var(--shadow-gold-hover);
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(226, 160, 36, 0.4);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 5px 20px rgba(226, 160, 36, 0.15);
 }
 
 .wishlist-img-container {
   position: relative;
-  height: 280px;
+  height: 320px;
   width: 100%;
   overflow: hidden;
   background-color: #161616;
@@ -71,39 +72,40 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: var(--transition-smooth);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .wishlist-card:hover .wishlist-img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .wishlist-remove-btn {
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background: rgba(10, 10, 10, 0.7);
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(226, 160, 36, 0.3);
   color: #ef4444;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   z-index: 3;
-  backdrop-filter: blur(4px);
-  transition: var(--transition-smooth);
+  backdrop-filter: blur(8px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .wishlist-remove-btn:hover {
   background: #ef4444;
   color: #ffffff;
   border-color: #ef4444;
   box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+  transform: scale(1.1);
 }
 
 .wishlist-info {
-  padding: 20px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;

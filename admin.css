@@ -19,41 +19,45 @@
 }
 .metric-card {
   background: var(--bg-secondary);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius-md);
-  padding: 25px;
+  border: 1px solid rgba(226, 160, 36, 0.15);
+  border-radius: var(--border-radius-lg);
+  padding: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: var(--shadow-dark);
-  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .metric-card:hover {
-  border-color: rgba(212, 175, 55, 0.2);
-  box-shadow: var(--shadow-gold);
+  transform: translateY(-5px);
+  border-color: rgba(226, 160, 36, 0.4);
+  box-shadow: 0 10px 25px rgba(226, 160, 36, 0.15);
 }
 .metric-title {
   font-size: 0.75rem;
   text-transform: uppercase;
   color: var(--text-secondary);
-  letter-spacing: 1.5px;
-  margin-bottom: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 .metric-val {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--text-primary);
 }
 .metric-icon-box {
-  background-color: rgba(212, 175, 55, 0.08);
+  background: linear-gradient(135deg, rgba(226, 160, 36, 0.1), rgba(226, 160, 36, 0.05));
   color: var(--gold-primary);
-  width: 48px;
-  height: 48px;
-  border-radius: var(--border-radius-sm);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid rgba(226, 160, 36, 0.2);
+  box-shadow: 0 0 15px rgba(226, 160, 36, 0.1);
 }
 
 /* Split layout for lists and creators */
@@ -66,21 +70,22 @@
 
 .admin-section-box {
   background: var(--bg-secondary);
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(226, 160, 36, 0.15);
   border-radius: var(--border-radius-lg);
-  padding: 35px;
-  box-shadow: var(--shadow-dark);
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .admin-section-title {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 25px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(226, 160, 36, 0.2);
   padding-bottom: 15px;
   color: var(--text-primary);
+  font-weight: 700;
 }
 
 /* Tables Styling */

@@ -11,22 +11,22 @@
   --bg-primary: #0a0a0a;
   --bg-secondary: #121212;
   --bg-tertiary: #1a1a1a;
-  --gold-primary: #d4af37;
-  --gold-light: #f5e093;
-  --gold-dark: #aa7c11;
+  --gold-primary: #e2a024;
+  --gold-light: #f5cf82;
+  --gold-dark: #b87a14;
   --text-primary: #ffffff;
   --text-secondary: #a3a3a3;
   --text-muted: #525252;
   
   --glass-bg: rgba(18, 18, 18, 0.75);
-  --glass-border: rgba(212, 175, 55, 0.2);
+  --glass-border: rgba(226, 160, 36, 0.2);
   --glass-blur: 16px;
   
   --font-display: 'Cinzel', serif;
   --font-body: 'Montserrat', sans-serif;
   
-  --shadow-gold: 0 8px 32px rgba(212, 175, 55, 0.12);
-  --shadow-gold-hover: 0 12px 40px rgba(212, 175, 55, 0.25);
+  --shadow-gold: 0 8px 32px rgba(226, 160, 36, 0.15);
+  --shadow-gold-hover: 0 12px 40px rgba(226, 160, 36, 0.3);
   --shadow-dark: 0 15px 35px rgba(0, 0, 0, 0.8);
   
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -47,8 +47,8 @@
   --text-muted: #9b9b9b;
   
   --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(212, 175, 55, 0.3);
-  --shadow-gold: 0 8px 32px rgba(212, 175, 55, 0.08);
+  --glass-border: rgba(226, 160, 36, 0.3);
+  --shadow-gold: 0 8px 32px rgba(226, 160, 36, 0.08);
   --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
@@ -193,23 +193,43 @@ header.scrolled {
   align-items: center;
 }
 .brand-logo {
-  font-size: 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.4rem;
   font-weight: 800;
   color: var(--text-primary);
-  letter-spacing: 3px;
+  letter-spacing: 2px;
+  text-decoration: none;
   position: relative;
+  transition: var(--transition-smooth);
+}
+.brand-logo-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-primary);
+  box-shadow: 0 0 10px rgba(226, 160, 36, 0.3);
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+.brand-logo:hover .brand-logo-img {
+  transform: rotate(15deg) scale(1.08);
+  box-shadow: 0 0 15px rgba(226, 160, 36, 0.6);
+  border-color: var(--gold-light);
 }
 .brand-logo span {
   color: var(--gold-primary);
+  font-weight: 800;
 }
 .brand-logo::after {
   content: '';
   position: absolute;
-  width: 30px;
+  width: 40px;
   height: 2px;
   background-color: var(--gold-primary);
   bottom: -4px;
-  left: 0;
+  left: 54px;
 }
 
 .nav-links {

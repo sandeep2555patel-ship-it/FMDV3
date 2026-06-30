@@ -495,3 +495,50 @@ window.FMD_DB = {
     }
   }
 };
+
+// --- RIPPLE EFFECT MICRO-INTERACTIONS ---
+window.initRippleEffect = function() {
+  const buttons = document.querySelectorAll('.btn-gold, .btn-outline, .btn-google, .action-btn, .quick-add-bag, .p-action-btn, .newsletter-btn, .size-btn, .qty-btn, .promo-btn, .cart-qty-btn, .profile-tab-btn, .admin-action-btn, .admin-status-update-btn, .wishlist-remove-btn, .filter-tab, .edit-avatar-trigger');
+  buttons.forEach(btn => {
+    // Avoid attaching multiple times
+    if (btn.hasAttribute('data-ripple')) return;
+    btn.setAttribute('data-ripple', 'true');
+    // Ensure button is positioned relatively for the ripple to work
+    if (window.getComputedStyle(btn).position === 'static') {
+      btn.style.position = 'relative';
+    }
+    // ensure overflow is hidden on button so ripple doesn't spill out
+    if (window.getComputedStyle(btn).overflow !== 'hidden') {
+      btn.style.overflow = 'hidden';
+    }
+    
+    btn.addEventListener('click', function(e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      
+      this.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    });
+  });
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.initRippleEffect();
+  // Ensure ripple works on dynamically injected content
+  const observer = new MutationObserver(() => {
+    window.initRippleEffect();
+  });
+  const productGrid = document.getElementById('product-grid');
+  if (productGrid) {
+    observer.observe(productGrid, { childList: true, subtree: true });
+  }
+});
